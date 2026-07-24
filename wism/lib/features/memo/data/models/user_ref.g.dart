@@ -7,7 +7,7 @@ part of 'user_ref.dart';
 // **************************************************************************
 
 _UserRef _$UserRefFromJson(Map<String, dynamic> json) => _UserRef(
-  id: (json['id'] as num).toInt(),
+  id: json['id'] as String,
   name: json['name'] as String,
   dept: json['dept'] as String?,
   position: json['position'] as String?,

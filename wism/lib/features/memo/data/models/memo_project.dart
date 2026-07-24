@@ -7,7 +7,7 @@ part 'memo_project.g.dart';
 @freezed
 abstract class MemoProject with _$MemoProject {
   const factory MemoProject({
-    required int id,
+    required String id,
     required String name,
     String? clientName,
   }) = _MemoProject;

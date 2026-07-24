@@ -63,20 +63,4 @@ class AuthController extends Notifier<AuthState> {
     state = const AuthState.unauthenticated();
   }
 
-  Future<void> updateProfile({
-    required String name,
-    String? position,
-    String? dept,
-    String? email,
-    String? phone,
-  }) async {
-    final updated = await ref.read(authRepositoryProvider).updateProfile(
-          name: name,
-          position: position,
-          dept: dept,
-          email: email,
-          phone: phone,
-        );
-    state = AuthState.authenticated(updated);
-  }
 }

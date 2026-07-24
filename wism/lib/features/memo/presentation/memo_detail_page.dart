@@ -20,7 +20,7 @@ import 'write_memo_sheet.dart';
 
 class MemoDetailPage extends ConsumerStatefulWidget {
   const MemoDetailPage({super.key, required this.memoId});
-  final int memoId;
+  final String memoId;
 
   @override
   ConsumerState<MemoDetailPage> createState() => _MemoDetailPageState();
@@ -434,7 +434,7 @@ class _MemoDetailPageState extends ConsumerState<MemoDetailPage> {
   }
 
   // ── 확인 현황 (긴급 메모) ──
-  Widget _confirmSection(Memo memo, int? currentUserId) {
+  Widget _confirmSection(Memo memo, String? currentUserId) {
     final isAuthor = memo.author.id == currentUserId;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

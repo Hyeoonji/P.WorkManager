@@ -8,15 +8,6 @@ abstract class AuthRepository {
 
   /// 저장된 토큰으로 현재 사용자 복원. 없거나 무효면 null.
   Future<AppUser?> currentUser();
-
-  /// 프로필 수정 (사진 제외 — 회사 서버 연동/읽기 전용).
-  Future<AppUser> updateProfile({
-    required String name,
-    String? position,
-    String? dept,
-    String? email,
-    String? phone,
-  });
 }
 
 class AuthException implements Exception {

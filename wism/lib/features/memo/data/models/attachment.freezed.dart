@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Attachment {
 
- int get id; int get memoId; String get fileName; String? get mimeType; int get size; String get url;
+ String get id; String get memoId; String get fileName; String? get mimeType; int get size; String get url;
 /// Create a copy of Attachment
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $AttachmentCopyWith<$Res>  {
   factory $AttachmentCopyWith(Attachment value, $Res Function(Attachment) _then) = _$AttachmentCopyWithImpl;
 @useResult
 $Res call({
- int id, int memoId, String fileName, String? mimeType, int size, String url
+ String id, String memoId, String fileName, String? mimeType, int size, String url
 });
 
 
@@ -68,8 +68,8 @@ class _$AttachmentCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? memoId = null,Object? fileName = null,Object? mimeType = freezed,Object? size = null,Object? url = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,memoId: null == memoId ? _self.memoId : memoId // ignore: cast_nullable_to_non_nullable
-as int,fileName: null == fileName ? _self.fileName : fileName // ignore: cast_nullable_to_non_nullable
+as String,memoId: null == memoId ? _self.memoId : memoId // ignore: cast_nullable_to_non_nullable
+as String,fileName: null == fileName ? _self.fileName : fileName // ignore: cast_nullable_to_non_nullable
 as String,mimeType: freezed == mimeType ? _self.mimeType : mimeType // ignore: cast_nullable_to_non_nullable
 as String?,size: null == size ? _self.size : size // ignore: cast_nullable_to_non_nullable
 as int,url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
@@ -158,7 +158,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int memoId,  String fileName,  String? mimeType,  int size,  String url)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String memoId,  String fileName,  String? mimeType,  int size,  String url)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Attachment() when $default != null:
 return $default(_that.id,_that.memoId,_that.fileName,_that.mimeType,_that.size,_that.url);case _:
@@ -179,7 +179,7 @@ return $default(_that.id,_that.memoId,_that.fileName,_that.mimeType,_that.size,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int memoId,  String fileName,  String? mimeType,  int size,  String url)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String memoId,  String fileName,  String? mimeType,  int size,  String url)  $default,) {final _that = this;
 switch (_that) {
 case _Attachment():
 return $default(_that.id,_that.memoId,_that.fileName,_that.mimeType,_that.size,_that.url);case _:
@@ -199,7 +199,7 @@ return $default(_that.id,_that.memoId,_that.fileName,_that.mimeType,_that.size,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int memoId,  String fileName,  String? mimeType,  int size,  String url)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String memoId,  String fileName,  String? mimeType,  int size,  String url)?  $default,) {final _that = this;
 switch (_that) {
 case _Attachment() when $default != null:
 return $default(_that.id,_that.memoId,_that.fileName,_that.mimeType,_that.size,_that.url);case _:
@@ -217,8 +217,8 @@ class _Attachment implements Attachment {
   const _Attachment({required this.id, required this.memoId, required this.fileName, this.mimeType, this.size = 0, required this.url});
   factory _Attachment.fromJson(Map<String, dynamic> json) => _$AttachmentFromJson(json);
 
-@override final  int id;
-@override final  int memoId;
+@override final  String id;
+@override final  String memoId;
 @override final  String fileName;
 @override final  String? mimeType;
 @override@JsonKey() final  int size;
@@ -257,7 +257,7 @@ abstract mixin class _$AttachmentCopyWith<$Res> implements $AttachmentCopyWith<$
   factory _$AttachmentCopyWith(_Attachment value, $Res Function(_Attachment) _then) = __$AttachmentCopyWithImpl;
 @override @useResult
 $Res call({
- int id, int memoId, String fileName, String? mimeType, int size, String url
+ String id, String memoId, String fileName, String? mimeType, int size, String url
 });
 
 
@@ -277,8 +277,8 @@ class __$AttachmentCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? memoId = null,Object? fileName = null,Object? mimeType = freezed,Object? size = null,Object? url = null,}) {
   return _then(_Attachment(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,memoId: null == memoId ? _self.memoId : memoId // ignore: cast_nullable_to_non_nullable
-as int,fileName: null == fileName ? _self.fileName : fileName // ignore: cast_nullable_to_non_nullable
+as String,memoId: null == memoId ? _self.memoId : memoId // ignore: cast_nullable_to_non_nullable
+as String,fileName: null == fileName ? _self.fileName : fileName // ignore: cast_nullable_to_non_nullable
 as String,mimeType: freezed == mimeType ? _self.mimeType : mimeType // ignore: cast_nullable_to_non_nullable
 as String?,size: null == size ? _self.size : size // ignore: cast_nullable_to_non_nullable
 as int,url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable

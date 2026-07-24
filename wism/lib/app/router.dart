@@ -31,7 +31,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/memo/:id',
         parentNavigatorKey: rootNavigatorKey,
         builder: (_, state) =>
-            MemoDetailPage(memoId: int.parse(state.pathParameters['id']!)),
+            MemoDetailPage(memoId: state.pathParameters['id']!),
       ),
       GoRoute(path: '/onboarding', builder: (_, _) => const OnboardingScreen()),
       GoRoute(path: '/login', builder: (_, _) => const LoginScreen()),

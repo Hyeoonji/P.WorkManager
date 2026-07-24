@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Comment {
 
- int get id; UserRef get author; String get content; String get type; DateTime get createdAt;
+ String get id; UserRef get author; String get content; String get type; DateTime get createdAt;
 /// Create a copy of Comment
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $CommentCopyWith<$Res>  {
   factory $CommentCopyWith(Comment value, $Res Function(Comment) _then) = _$CommentCopyWithImpl;
 @useResult
 $Res call({
- int id, UserRef author, String content, String type, DateTime createdAt
+ String id, UserRef author, String content, String type, DateTime createdAt
 });
 
 
@@ -68,7 +68,7 @@ class _$CommentCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? author = null,Object? content = null,Object? type = null,Object? createdAt = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,author: null == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
+as String,author: null == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
 as UserRef,content: null == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
 as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
@@ -166,7 +166,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  UserRef author,  String content,  String type,  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  UserRef author,  String content,  String type,  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Comment() when $default != null:
 return $default(_that.id,_that.author,_that.content,_that.type,_that.createdAt);case _:
@@ -187,7 +187,7 @@ return $default(_that.id,_that.author,_that.content,_that.type,_that.createdAt);
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  UserRef author,  String content,  String type,  DateTime createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  UserRef author,  String content,  String type,  DateTime createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _Comment():
 return $default(_that.id,_that.author,_that.content,_that.type,_that.createdAt);case _:
@@ -207,7 +207,7 @@ return $default(_that.id,_that.author,_that.content,_that.type,_that.createdAt);
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  UserRef author,  String content,  String type,  DateTime createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  UserRef author,  String content,  String type,  DateTime createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Comment() when $default != null:
 return $default(_that.id,_that.author,_that.content,_that.type,_that.createdAt);case _:
@@ -225,7 +225,7 @@ class _Comment implements Comment {
   const _Comment({required this.id, required this.author, required this.content, this.type = 'comment', required this.createdAt});
   factory _Comment.fromJson(Map<String, dynamic> json) => _$CommentFromJson(json);
 
-@override final  int id;
+@override final  String id;
 @override final  UserRef author;
 @override final  String content;
 @override@JsonKey() final  String type;
@@ -264,7 +264,7 @@ abstract mixin class _$CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
   factory _$CommentCopyWith(_Comment value, $Res Function(_Comment) _then) = __$CommentCopyWithImpl;
 @override @useResult
 $Res call({
- int id, UserRef author, String content, String type, DateTime createdAt
+ String id, UserRef author, String content, String type, DateTime createdAt
 });
 
 
@@ -284,7 +284,7 @@ class __$CommentCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? author = null,Object? content = null,Object? type = null,Object? createdAt = null,}) {
   return _then(_Comment(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,author: null == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
+as String,author: null == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
 as UserRef,content: null == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
 as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable

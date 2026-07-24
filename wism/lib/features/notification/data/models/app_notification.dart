@@ -12,7 +12,7 @@ abstract class AppNotification with _$AppNotification {
     required String type,
     required String title,
     String? content,
-    int? memoId,
+    String? memoId,
     @Default(false) bool isRead,
     required DateTime createdAt,
   }) = _AppNotification;

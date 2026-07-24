@@ -35,26 +35,4 @@ class MockAuthRepository implements AuthRepository {
     return findMockUser(token.substring(5));
   }
 
-  @override
-  Future<AppUser> updateProfile({
-    required String name,
-    String? position,
-    String? dept,
-    String? email,
-    String? phone,
-  }) async {
-    await Future.delayed(const Duration(milliseconds: 300));
-    final token = await _storage.readAccess();
-    final base = (token != null && token.startsWith('mock:'))
-        ? findMockUser(token.substring(5))
-        : null;
-    final current = base ?? const AppUser(id: 0, employeeNo: '', name: '나');
-    return current.copyWith(
-      name: name,
-      position: position,
-      dept: dept,
-      email: email,
-      phone: phone,
-    );
-  }
 }

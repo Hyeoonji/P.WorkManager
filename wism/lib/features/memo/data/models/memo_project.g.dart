@@ -7,7 +7,7 @@ part of 'memo_project.dart';
 // **************************************************************************
 
 _MemoProject _$MemoProjectFromJson(Map<String, dynamic> json) => _MemoProject(
-  id: (json['id'] as num).toInt(),
+  id: json['id'] as String,
   name: json['name'] as String,
   clientName: json['clientName'] as String?,
 );

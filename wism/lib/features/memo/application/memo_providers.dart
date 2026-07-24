@@ -46,7 +46,7 @@ final memoListProvider =
 });
 
 final memoDetailProvider =
-    FutureProvider.autoDispose.family<Memo, int>((ref, id) async {
+    FutureProvider.autoDispose.family<Memo, String>((ref, id) async {
   return ref.watch(memoRepositoryProvider).detail(id);
 });
 

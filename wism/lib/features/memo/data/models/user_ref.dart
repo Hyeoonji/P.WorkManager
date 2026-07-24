@@ -7,7 +7,7 @@ part 'user_ref.g.dart';
 @freezed
 abstract class UserRef with _$UserRef {
   const factory UserRef({
-    required int id,
+    required String id,
     required String name,
     String? dept,
     String? position,

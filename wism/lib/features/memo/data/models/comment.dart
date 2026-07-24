@@ -9,7 +9,7 @@ part 'comment.g.dart';
 @freezed
 abstract class Comment with _$Comment {
   const factory Comment({
-    required int id,
+    required String id,
     required UserRef author,
     required String content,
     @Default('comment') String type,

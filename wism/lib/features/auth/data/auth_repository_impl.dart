@@ -54,24 +54,6 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  @override
-  Future<AppUser> updateProfile({
-    required String name,
-    String? position,
-    String? dept,
-    String? email,
-    String? phone,
-  }) async {
-    final res = await _dio.put<Map<String, dynamic>>('/me', data: {
-      'name': name,
-      'position': position,
-      'dept': dept,
-      'email': email,
-      'phone': phone,
-    });
-    return AppUser.fromJson(res.data!);
-  }
-
   String _message(DioException e) {
     final data = e.response?.data;
     if (data is Map && data['message'] is String) return data['message'] as String;

@@ -36,7 +36,7 @@ class MemoRepositoryImpl implements MemoRepository {
   }
 
   @override
-  Future<Memo> detail(int id) async {
+  Future<Memo> detail(String id) async {
     final res = await _dio.get<Map<String, dynamic>>('/memos/$id');
     return Memo.fromJson(res.data!);
   }
@@ -48,18 +48,18 @@ class MemoRepositoryImpl implements MemoRepository {
   }
 
   @override
-  Future<Memo> update(int id, MemoDraft draft) async {
+  Future<Memo> update(String id, MemoDraft draft) async {
     final res = await _dio.put<Map<String, dynamic>>('/memos/$id', data: draft.toJson());
     return Memo.fromJson(res.data!);
   }
 
   @override
-  Future<void> delete(int id) async {
+  Future<void> delete(String id) async {
     await _dio.delete('/memos/$id');
   }
 
   @override
-  Future<Memo> setBookmark(int id, {required bool bookmarked}) async {
+  Future<Memo> setBookmark(String id, {required bool bookmarked}) async {
     if (bookmarked) {
       await _dio.put('/memos/$id/bookmark');
     } else {
@@ -69,13 +69,13 @@ class MemoRepositoryImpl implements MemoRepository {
   }
 
   @override
-  Future<Memo> markRead(int id) async {
+  Future<Memo> markRead(String id) async {
     await _dio.post('/memos/$id/read');
     return detail(id);
   }
 
   @override
-  Future<Comment> addComment(int memoId, String content) async {
+  Future<Comment> addComment(String memoId, String content) async {
     final res = await _dio.post<Map<String, dynamic>>(
       '/memos/$memoId/comments',
       data: {'content': content, 'type': 'comment'},
@@ -84,18 +84,18 @@ class MemoRepositoryImpl implements MemoRepository {
   }
 
   @override
-  Future<void> updateComment(int memoId, int commentId, String content) async {
+  Future<void> updateComment(String memoId, String commentId, String content) async {
     await _dio.put('/comments/$commentId', data: {'content': content});
   }
 
   @override
-  Future<void> deleteComment(int memoId, int commentId) async {
+  Future<void> deleteComment(String memoId, String commentId) async {
     await _dio.delete('/comments/$commentId');
   }
 
   @override
   Future<Attachment> uploadAttachment(
-      int memoId, String filePath, String fileName) async {
+      String memoId, String filePath, String fileName) async {
     final form = FormData.fromMap({
       'file': await MultipartFile.fromFile(filePath, filename: fileName),
     });
@@ -107,12 +107,12 @@ class MemoRepositoryImpl implements MemoRepository {
   }
 
   @override
-  Future<void> deleteAttachment(int attachmentId) async {
+  Future<void> deleteAttachment(String attachmentId) async {
     await _dio.delete('/attachments/$attachmentId');
   }
 
   @override
-  Future<List<int>> downloadAttachment(int attachmentId) async {
+  Future<List<int>> downloadAttachment(String attachmentId) async {
     final res = await _dio.get<List<int>>(
       '/attachments/$attachmentId/download',
       options: Options(responseType: ResponseType.bytes),

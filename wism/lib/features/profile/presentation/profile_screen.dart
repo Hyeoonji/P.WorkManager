@@ -6,7 +6,6 @@ import '../../../core/theme/app_colors.dart';
 import '../../auth/application/auth_controller.dart';
 import '../../help/presentation/help_screen.dart';
 import '../application/profile_providers.dart';
-import 'profile_edit_sheet.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -73,31 +72,7 @@ class ProfileScreen extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      InkWell(
-                        onTap: () => showProfileEditSheet(context, user),
-                        borderRadius: BorderRadius.circular(8),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFE8F1FB),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: const Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(LucideIcons.pencil,
-                                  size: 14, color: AppColors.primary),
-                              SizedBox(width: 6),
-                              Text('편집',
-                                  style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColors.primary)),
-                            ],
-                          ),
-                        ),
-                      ),
+                      // 프로필은 회사 인사시스템(WGSOM) 소유 — 앱에서 수정 불가(읽기전용)
                     ],
                   ),
                 ),

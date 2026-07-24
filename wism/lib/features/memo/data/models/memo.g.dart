@@ -7,7 +7,7 @@ part of 'memo.dart';
 // **************************************************************************
 
 _Memo _$MemoFromJson(Map<String, dynamic> json) => _Memo(
-  id: (json['id'] as num).toInt(),
+  id: json['id'] as String,
   title: json['title'] as String,
   content: json['content'] as String?,
   priority: json['priority'] as String? ?? '일반',

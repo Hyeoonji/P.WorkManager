@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AppNotification {
 
- int get id; String get type; String get title; String? get content; int? get memoId; bool get isRead; DateTime get createdAt;
+ int get id; String get type; String get title; String? get content; String? get memoId; bool get isRead; DateTime get createdAt;
 /// Create a copy of AppNotification
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $AppNotificationCopyWith<$Res>  {
   factory $AppNotificationCopyWith(AppNotification value, $Res Function(AppNotification) _then) = _$AppNotificationCopyWithImpl;
 @useResult
 $Res call({
- int id, String type, String title, String? content, int? memoId, bool isRead, DateTime createdAt
+ int id, String type, String title, String? content, String? memoId, bool isRead, DateTime createdAt
 });
 
 
@@ -72,7 +72,7 @@ as int,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nu
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,content: freezed == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
 as String?,memoId: freezed == memoId ? _self.memoId : memoId // ignore: cast_nullable_to_non_nullable
-as int?,isRead: null == isRead ? _self.isRead : isRead // ignore: cast_nullable_to_non_nullable
+as String?,isRead: null == isRead ? _self.isRead : isRead // ignore: cast_nullable_to_non_nullable
 as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,
   ));
@@ -159,7 +159,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String type,  String title,  String? content,  int? memoId,  bool isRead,  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String type,  String title,  String? content,  String? memoId,  bool isRead,  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppNotification() when $default != null:
 return $default(_that.id,_that.type,_that.title,_that.content,_that.memoId,_that.isRead,_that.createdAt);case _:
@@ -180,7 +180,7 @@ return $default(_that.id,_that.type,_that.title,_that.content,_that.memoId,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String type,  String title,  String? content,  int? memoId,  bool isRead,  DateTime createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String type,  String title,  String? content,  String? memoId,  bool isRead,  DateTime createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _AppNotification():
 return $default(_that.id,_that.type,_that.title,_that.content,_that.memoId,_that.isRead,_that.createdAt);case _:
@@ -200,7 +200,7 @@ return $default(_that.id,_that.type,_that.title,_that.content,_that.memoId,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String type,  String title,  String? content,  int? memoId,  bool isRead,  DateTime createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String type,  String title,  String? content,  String? memoId,  bool isRead,  DateTime createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _AppNotification() when $default != null:
 return $default(_that.id,_that.type,_that.title,_that.content,_that.memoId,_that.isRead,_that.createdAt);case _:
@@ -222,7 +222,7 @@ class _AppNotification implements AppNotification {
 @override final  String type;
 @override final  String title;
 @override final  String? content;
-@override final  int? memoId;
+@override final  String? memoId;
 @override@JsonKey() final  bool isRead;
 @override final  DateTime createdAt;
 
@@ -259,7 +259,7 @@ abstract mixin class _$AppNotificationCopyWith<$Res> implements $AppNotification
   factory _$AppNotificationCopyWith(_AppNotification value, $Res Function(_AppNotification) _then) = __$AppNotificationCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String type, String title, String? content, int? memoId, bool isRead, DateTime createdAt
+ int id, String type, String title, String? content, String? memoId, bool isRead, DateTime createdAt
 });
 
 
@@ -283,7 +283,7 @@ as int,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nu
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,content: freezed == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
 as String?,memoId: freezed == memoId ? _self.memoId : memoId // ignore: cast_nullable_to_non_nullable
-as int?,isRead: null == isRead ? _self.isRead : isRead // ignore: cast_nullable_to_non_nullable
+as String?,isRead: null == isRead ? _self.isRead : isRead // ignore: cast_nullable_to_non_nullable
 as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,
   ));

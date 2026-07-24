@@ -12,7 +12,7 @@ _AppNotification _$AppNotificationFromJson(Map<String, dynamic> json) =>
       type: json['type'] as String,
       title: json['title'] as String,
       content: json['content'] as String?,
-      memoId: (json['memoId'] as num?)?.toInt(),
+      memoId: json['memoId'] as String?,
       isRead: json['isRead'] as bool? ?? false,
       createdAt: DateTime.parse(json['createdAt'] as String),
     );

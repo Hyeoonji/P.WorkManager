@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Memo {
 
- int get id; String get title; String? get content; String get priority;// 긴급 | 일반
+ String get id; String get title; String? get content; String get priority;// 긴급 | 일반
  String get category;// 일정 | 이슈 | 결정사항 | 회의록 | 기타
  MemoProject? get project; DateTime? get scheduledDate; UserRef get author; List<Assignee> get assignees; DateTime get createdAt; int get readBy; int get totalReaders; int get viewCount; int get commentCount; bool get bookmarked; bool get isRead; bool get isConfirmer;// 현재 사용자가 이 메모의 확인자인지
  bool get confirmedByMe;// 현재 사용자가 확인(읽음) 완료했는지
@@ -52,7 +52,7 @@ abstract mixin class $MemoCopyWith<$Res>  {
   factory $MemoCopyWith(Memo value, $Res Function(Memo) _then) = _$MemoCopyWithImpl;
 @useResult
 $Res call({
- int id, String title, String? content, String priority, String category, MemoProject? project, DateTime? scheduledDate, UserRef author, List<Assignee> assignees, DateTime createdAt, int readBy, int totalReaders, int viewCount, int commentCount, bool bookmarked, bool isRead, bool isConfirmer, bool confirmedByMe, List<Comment> comments, List<Attachment> attachments
+ String id, String title, String? content, String priority, String category, MemoProject? project, DateTime? scheduledDate, UserRef author, List<Assignee> assignees, DateTime createdAt, int readBy, int totalReaders, int viewCount, int commentCount, bool bookmarked, bool isRead, bool isConfirmer, bool confirmedByMe, List<Comment> comments, List<Attachment> attachments
 });
 
 
@@ -72,7 +72,7 @@ class _$MemoCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? content = freezed,Object? priority = null,Object? category = null,Object? project = freezed,Object? scheduledDate = freezed,Object? author = null,Object? assignees = null,Object? createdAt = null,Object? readBy = null,Object? totalReaders = null,Object? viewCount = null,Object? commentCount = null,Object? bookmarked = null,Object? isRead = null,Object? isConfirmer = null,Object? confirmedByMe = null,Object? comments = null,Object? attachments = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,content: freezed == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
 as String?,priority: null == priority ? _self.priority : priority // ignore: cast_nullable_to_non_nullable
 as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
@@ -197,7 +197,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String title,  String? content,  String priority,  String category,  MemoProject? project,  DateTime? scheduledDate,  UserRef author,  List<Assignee> assignees,  DateTime createdAt,  int readBy,  int totalReaders,  int viewCount,  int commentCount,  bool bookmarked,  bool isRead,  bool isConfirmer,  bool confirmedByMe,  List<Comment> comments,  List<Attachment> attachments)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  String? content,  String priority,  String category,  MemoProject? project,  DateTime? scheduledDate,  UserRef author,  List<Assignee> assignees,  DateTime createdAt,  int readBy,  int totalReaders,  int viewCount,  int commentCount,  bool bookmarked,  bool isRead,  bool isConfirmer,  bool confirmedByMe,  List<Comment> comments,  List<Attachment> attachments)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Memo() when $default != null:
 return $default(_that.id,_that.title,_that.content,_that.priority,_that.category,_that.project,_that.scheduledDate,_that.author,_that.assignees,_that.createdAt,_that.readBy,_that.totalReaders,_that.viewCount,_that.commentCount,_that.bookmarked,_that.isRead,_that.isConfirmer,_that.confirmedByMe,_that.comments,_that.attachments);case _:
@@ -218,7 +218,7 @@ return $default(_that.id,_that.title,_that.content,_that.priority,_that.category
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String title,  String? content,  String priority,  String category,  MemoProject? project,  DateTime? scheduledDate,  UserRef author,  List<Assignee> assignees,  DateTime createdAt,  int readBy,  int totalReaders,  int viewCount,  int commentCount,  bool bookmarked,  bool isRead,  bool isConfirmer,  bool confirmedByMe,  List<Comment> comments,  List<Attachment> attachments)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  String? content,  String priority,  String category,  MemoProject? project,  DateTime? scheduledDate,  UserRef author,  List<Assignee> assignees,  DateTime createdAt,  int readBy,  int totalReaders,  int viewCount,  int commentCount,  bool bookmarked,  bool isRead,  bool isConfirmer,  bool confirmedByMe,  List<Comment> comments,  List<Attachment> attachments)  $default,) {final _that = this;
 switch (_that) {
 case _Memo():
 return $default(_that.id,_that.title,_that.content,_that.priority,_that.category,_that.project,_that.scheduledDate,_that.author,_that.assignees,_that.createdAt,_that.readBy,_that.totalReaders,_that.viewCount,_that.commentCount,_that.bookmarked,_that.isRead,_that.isConfirmer,_that.confirmedByMe,_that.comments,_that.attachments);case _:
@@ -238,7 +238,7 @@ return $default(_that.id,_that.title,_that.content,_that.priority,_that.category
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String title,  String? content,  String priority,  String category,  MemoProject? project,  DateTime? scheduledDate,  UserRef author,  List<Assignee> assignees,  DateTime createdAt,  int readBy,  int totalReaders,  int viewCount,  int commentCount,  bool bookmarked,  bool isRead,  bool isConfirmer,  bool confirmedByMe,  List<Comment> comments,  List<Attachment> attachments)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  String? content,  String priority,  String category,  MemoProject? project,  DateTime? scheduledDate,  UserRef author,  List<Assignee> assignees,  DateTime createdAt,  int readBy,  int totalReaders,  int viewCount,  int commentCount,  bool bookmarked,  bool isRead,  bool isConfirmer,  bool confirmedByMe,  List<Comment> comments,  List<Attachment> attachments)?  $default,) {final _that = this;
 switch (_that) {
 case _Memo() when $default != null:
 return $default(_that.id,_that.title,_that.content,_that.priority,_that.category,_that.project,_that.scheduledDate,_that.author,_that.assignees,_that.createdAt,_that.readBy,_that.totalReaders,_that.viewCount,_that.commentCount,_that.bookmarked,_that.isRead,_that.isConfirmer,_that.confirmedByMe,_that.comments,_that.attachments);case _:
@@ -256,7 +256,7 @@ class _Memo implements Memo {
   const _Memo({required this.id, required this.title, this.content, this.priority = '일반', this.category = '기타', this.project, this.scheduledDate, required this.author, final  List<Assignee> assignees = const <Assignee>[], required this.createdAt, this.readBy = 0, this.totalReaders = 0, this.viewCount = 0, this.commentCount = 0, this.bookmarked = false, this.isRead = false, this.isConfirmer = false, this.confirmedByMe = false, final  List<Comment> comments = const <Comment>[], final  List<Attachment> attachments = const <Attachment>[]}): _assignees = assignees,_comments = comments,_attachments = attachments;
   factory _Memo.fromJson(Map<String, dynamic> json) => _$MemoFromJson(json);
 
-@override final  int id;
+@override final  String id;
 @override final  String title;
 @override final  String? content;
 @override@JsonKey() final  String priority;
@@ -333,7 +333,7 @@ abstract mixin class _$MemoCopyWith<$Res> implements $MemoCopyWith<$Res> {
   factory _$MemoCopyWith(_Memo value, $Res Function(_Memo) _then) = __$MemoCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String title, String? content, String priority, String category, MemoProject? project, DateTime? scheduledDate, UserRef author, List<Assignee> assignees, DateTime createdAt, int readBy, int totalReaders, int viewCount, int commentCount, bool bookmarked, bool isRead, bool isConfirmer, bool confirmedByMe, List<Comment> comments, List<Attachment> attachments
+ String id, String title, String? content, String priority, String category, MemoProject? project, DateTime? scheduledDate, UserRef author, List<Assignee> assignees, DateTime createdAt, int readBy, int totalReaders, int viewCount, int commentCount, bool bookmarked, bool isRead, bool isConfirmer, bool confirmedByMe, List<Comment> comments, List<Attachment> attachments
 });
 
 
@@ -353,7 +353,7 @@ class __$MemoCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? content = freezed,Object? priority = null,Object? category = null,Object? project = freezed,Object? scheduledDate = freezed,Object? author = null,Object? assignees = null,Object? createdAt = null,Object? readBy = null,Object? totalReaders = null,Object? viewCount = null,Object? commentCount = null,Object? bookmarked = null,Object? isRead = null,Object? isConfirmer = null,Object? confirmedByMe = null,Object? comments = null,Object? attachments = null,}) {
   return _then(_Memo(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,content: freezed == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
 as String?,priority: null == priority ? _self.priority : priority // ignore: cast_nullable_to_non_nullable
 as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable

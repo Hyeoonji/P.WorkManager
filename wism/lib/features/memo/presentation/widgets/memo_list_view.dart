@@ -40,7 +40,7 @@ class _MemoListViewState extends ConsumerState<MemoListView> {
     super.dispose();
   }
 
-  Future<void> _toggleBookmark(int id, bool current) async {
+  Future<void> _toggleBookmark(String id, bool current) async {
     await ref.read(memoRepositoryProvider).setBookmark(id, bookmarked: !current);
     ref.invalidate(memoListProvider);
     ref.invalidate(allMemosProvider);

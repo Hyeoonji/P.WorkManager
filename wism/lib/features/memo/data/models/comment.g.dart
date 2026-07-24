@@ -7,7 +7,7 @@ part of 'comment.dart';
 // **************************************************************************
 
 _Comment _$CommentFromJson(Map<String, dynamic> json) => _Comment(
-  id: (json['id'] as num).toInt(),
+  id: json['id'] as String,
   author: UserRef.fromJson(json['author'] as Map<String, dynamic>),
   content: json['content'] as String,
   type: json['type'] as String? ?? 'comment',

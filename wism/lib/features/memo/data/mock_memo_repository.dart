@@ -21,10 +21,10 @@ class _MemoStore {
   late List<Memo> _memos;
   int _nextMemoId = 1000;
   int _nextCommentId = 6000;
-  final Set<int> _readByMe = {};
+  final Set<String> _readByMe = {};
 
-  int newMemoId() => _nextMemoId++;
-  int newCommentId() => _nextCommentId++;
+  String newMemoId() => 'M${_nextMemoId++}';
+  String newCommentId() => 'C${_nextCommentId++}';
 }
 
 /// 서버 미구축 단계용 Mock 메모 리포지토리.
@@ -34,7 +34,7 @@ class MockMemoRepository implements MemoRepository {
   final _store = _MemoStore.instance;
 
   UserRef get _me => UserRef(
-        id: _currentUser?.id ?? 0,
+        id: _currentUser?.id ?? '0',
         name: _currentUser?.name ?? '나',
         dept: _currentUser?.dept,
         position: _currentUser?.position,
@@ -81,7 +81,7 @@ class MockMemoRepository implements MemoRepository {
   }
 
   @override
-  Future<Memo> detail(int id) async {
+  Future<Memo> detail(String id) async {
     return _store._memos.firstWhere((m) => m.id == id);
   }
 
@@ -108,7 +108,7 @@ class MockMemoRepository implements MemoRepository {
   }
 
   @override
-  Future<Memo> update(int id, MemoDraft draft) async {
+  Future<Memo> update(String id, MemoDraft draft) async {
     final i = _store._memos.indexWhere((m) => m.id == id);
     final updated = _store._memos[i].copyWith(
       title: draft.title,
@@ -124,19 +124,19 @@ class MockMemoRepository implements MemoRepository {
   }
 
   @override
-  Future<void> delete(int id) async {
+  Future<void> delete(String id) async {
     _store._memos.removeWhere((m) => m.id == id);
   }
 
   @override
-  Future<Memo> setBookmark(int id, {required bool bookmarked}) async {
+  Future<Memo> setBookmark(String id, {required bool bookmarked}) async {
     final i = _store._memos.indexWhere((m) => m.id == id);
     _store._memos[i] = _store._memos[i].copyWith(bookmarked: bookmarked);
     return _store._memos[i];
   }
 
   @override
-  Future<Memo> markRead(int id) async {
+  Future<Memo> markRead(String id) async {
     final i = _store._memos.indexWhere((m) => m.id == id);
     final m = _store._memos[i];
     if (_store._readByMe.contains(id)) return m;
@@ -152,7 +152,7 @@ class MockMemoRepository implements MemoRepository {
   }
 
   @override
-  Future<Comment> addComment(int memoId, String content) async {
+  Future<Comment> addComment(String memoId, String content) async {
     final i = _store._memos.indexWhere((m) => m.id == memoId);
     final comment = Comment(
       id: _store.newCommentId(),
@@ -169,7 +169,7 @@ class MockMemoRepository implements MemoRepository {
   }
 
   @override
-  Future<void> updateComment(int memoId, int commentId, String content) async {
+  Future<void> updateComment(String memoId, String commentId, String content) async {
     final i = _store._memos.indexWhere((m) => m.id == memoId);
     if (i < 0) return;
     final m = _store._memos[i];
@@ -180,7 +180,7 @@ class MockMemoRepository implements MemoRepository {
   }
 
   @override
-  Future<void> deleteComment(int memoId, int commentId) async {
+  Future<void> deleteComment(String memoId, String commentId) async {
     final i = _store._memos.indexWhere((m) => m.id == memoId);
     if (i < 0) return;
     final m = _store._memos[i];
@@ -191,7 +191,7 @@ class MockMemoRepository implements MemoRepository {
 
   @override
   Future<Attachment> uploadAttachment(
-      int memoId, String filePath, String fileName) async {
+      String memoId, String filePath, String fileName) async {
     final i = _store._memos.indexWhere((m) => m.id == memoId);
     final m = _store._memos[i];
     final att = Attachment(
@@ -206,7 +206,7 @@ class MockMemoRepository implements MemoRepository {
   }
 
   @override
-  Future<void> deleteAttachment(int attachmentId) async {
+  Future<void> deleteAttachment(String attachmentId) async {
     for (var i = 0; i < _store._memos.length; i++) {
       final m = _store._memos[i];
       if (m.attachments.any((a) => a.id == attachmentId)) {
@@ -220,7 +220,7 @@ class MockMemoRepository implements MemoRepository {
   }
 
   @override
-  Future<List<int>> downloadAttachment(int attachmentId) async {
+  Future<List<int>> downloadAttachment(String attachmentId) async {
     throw UnsupportedError('Mock 모드에서는 첨부 다운로드를 지원하지 않습니다.');
   }
 
@@ -265,7 +265,7 @@ class MockMemoRepository implements MemoRepository {
     return mockProjects.where((p) => p.name.contains(q)).toList();
   }
 
-  MemoProject? _projectOf(int? id) {
+  MemoProject? _projectOf(String? id) {
     if (id == null) return null;
     for (final p in mockProjects) {
       if (p.id == id) return p;
@@ -273,7 +273,7 @@ class MockMemoRepository implements MemoRepository {
     return null;
   }
 
-  List<Assignee> _assigneesOf(List<int> ids) {
+  List<Assignee> _assigneesOf(List<String> ids) {
     final result = <Assignee>[];
     for (final id in ids) {
       final u = mockUsers.where((u) => u.id == id).firstOrNull;

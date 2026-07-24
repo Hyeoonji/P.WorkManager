@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AppUser {
 
- int get id; String get employeeNo; String get name; String? get email; String? get phone; String? get position; String? get dept; String? get photoUrl; String get role;
+ String get id; String get employeeNo; String get name; String? get email; String? get phone; String? get position; String? get dept; String? get photoUrl; String get role;
 /// Create a copy of AppUser
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $AppUserCopyWith<$Res>  {
   factory $AppUserCopyWith(AppUser value, $Res Function(AppUser) _then) = _$AppUserCopyWithImpl;
 @useResult
 $Res call({
- int id, String employeeNo, String name, String? email, String? phone, String? position, String? dept, String? photoUrl, String role
+ String id, String employeeNo, String name, String? email, String? phone, String? position, String? dept, String? photoUrl, String role
 });
 
 
@@ -68,7 +68,7 @@ class _$AppUserCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? employeeNo = null,Object? name = null,Object? email = freezed,Object? phone = freezed,Object? position = freezed,Object? dept = freezed,Object? photoUrl = freezed,Object? role = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,employeeNo: null == employeeNo ? _self.employeeNo : employeeNo // ignore: cast_nullable_to_non_nullable
+as String,employeeNo: null == employeeNo ? _self.employeeNo : employeeNo // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
@@ -161,7 +161,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String employeeNo,  String name,  String? email,  String? phone,  String? position,  String? dept,  String? photoUrl,  String role)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String employeeNo,  String name,  String? email,  String? phone,  String? position,  String? dept,  String? photoUrl,  String role)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppUser() when $default != null:
 return $default(_that.id,_that.employeeNo,_that.name,_that.email,_that.phone,_that.position,_that.dept,_that.photoUrl,_that.role);case _:
@@ -182,7 +182,7 @@ return $default(_that.id,_that.employeeNo,_that.name,_that.email,_that.phone,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String employeeNo,  String name,  String? email,  String? phone,  String? position,  String? dept,  String? photoUrl,  String role)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String employeeNo,  String name,  String? email,  String? phone,  String? position,  String? dept,  String? photoUrl,  String role)  $default,) {final _that = this;
 switch (_that) {
 case _AppUser():
 return $default(_that.id,_that.employeeNo,_that.name,_that.email,_that.phone,_that.position,_that.dept,_that.photoUrl,_that.role);case _:
@@ -202,7 +202,7 @@ return $default(_that.id,_that.employeeNo,_that.name,_that.email,_that.phone,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String employeeNo,  String name,  String? email,  String? phone,  String? position,  String? dept,  String? photoUrl,  String role)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String employeeNo,  String name,  String? email,  String? phone,  String? position,  String? dept,  String? photoUrl,  String role)?  $default,) {final _that = this;
 switch (_that) {
 case _AppUser() when $default != null:
 return $default(_that.id,_that.employeeNo,_that.name,_that.email,_that.phone,_that.position,_that.dept,_that.photoUrl,_that.role);case _:
@@ -220,7 +220,7 @@ class _AppUser implements AppUser {
   const _AppUser({required this.id, required this.employeeNo, required this.name, this.email, this.phone, this.position, this.dept, this.photoUrl, this.role = 'manager'});
   factory _AppUser.fromJson(Map<String, dynamic> json) => _$AppUserFromJson(json);
 
-@override final  int id;
+@override final  String id;
 @override final  String employeeNo;
 @override final  String name;
 @override final  String? email;
@@ -263,7 +263,7 @@ abstract mixin class _$AppUserCopyWith<$Res> implements $AppUserCopyWith<$Res> {
   factory _$AppUserCopyWith(_AppUser value, $Res Function(_AppUser) _then) = __$AppUserCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String employeeNo, String name, String? email, String? phone, String? position, String? dept, String? photoUrl, String role
+ String id, String employeeNo, String name, String? email, String? phone, String? position, String? dept, String? photoUrl, String role
 });
 
 
@@ -283,7 +283,7 @@ class __$AppUserCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? employeeNo = null,Object? name = null,Object? email = freezed,Object? phone = freezed,Object? position = freezed,Object? dept = freezed,Object? photoUrl = freezed,Object? role = null,}) {
   return _then(_AppUser(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,employeeNo: null == employeeNo ? _self.employeeNo : employeeNo // ignore: cast_nullable_to_non_nullable
+as String,employeeNo: null == employeeNo ? _self.employeeNo : employeeNo // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable

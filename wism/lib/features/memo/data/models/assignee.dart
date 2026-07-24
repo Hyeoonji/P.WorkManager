@@ -7,7 +7,7 @@ part 'assignee.g.dart';
 @freezed
 abstract class Assignee with _$Assignee {
   const factory Assignee({
-    required int userId,
+    required String userId,
     required String name,
     @Default(false) bool confirmed, // 확인(읽음) 완료 여부 — 상세조회에서만 채워짐
   }) = _Assignee;

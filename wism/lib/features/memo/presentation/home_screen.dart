@@ -39,7 +39,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         MaterialPageRoute(builder: (_) => const CalendarPage()),
       );
 
-  void _openMemo(int id) => Navigator.of(context, rootNavigator: true)
+  void _openMemo(String id) => Navigator.of(context, rootNavigator: true)
       .push(MaterialPageRoute(builder: (_) => MemoDetailPage(memoId: id)))
       .then((_) => ref.invalidate(allMemosProvider));
 

@@ -13,7 +13,7 @@ part 'memo.g.dart';
 @freezed
 abstract class Memo with _$Memo {
   const factory Memo({
-    required int id,
+    required String id,
     required String title,
     String? content,
     @Default('일반') String priority, // 긴급 | 일반

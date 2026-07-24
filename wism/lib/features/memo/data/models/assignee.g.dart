@@ -7,7 +7,7 @@ part of 'assignee.dart';
 // **************************************************************************
 
 _Assignee _$AssigneeFromJson(Map<String, dynamic> json) => _Assignee(
-  userId: (json['userId'] as num).toInt(),
+  userId: json['userId'] as String,
   name: json['name'] as String,
   confirmed: json['confirmed'] as bool? ?? false,
 );

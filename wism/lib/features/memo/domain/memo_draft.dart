@@ -14,9 +14,9 @@ class MemoDraft {
   final String content;
   final String priority;
   final String category;
-  final int? projectId;
+  final String? projectId;
   final DateTime? scheduledDate;
-  final List<int> assigneeIds;
+  final List<String> assigneeIds;
 
   Map<String, dynamic> toJson() => {
         'title': title,

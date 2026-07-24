@@ -7,8 +7,8 @@ part 'attachment.g.dart';
 @freezed
 abstract class Attachment with _$Attachment {
   const factory Attachment({
-    required int id,
-    required int memoId,
+    required String id,
+    required String memoId,
     required String fileName,
     String? mimeType,
     @Default(0) int size,

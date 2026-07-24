@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MemoProject {
 
- int get id; String get name; String? get clientName;
+ String get id; String get name; String? get clientName;
 /// Create a copy of MemoProject
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $MemoProjectCopyWith<$Res>  {
   factory $MemoProjectCopyWith(MemoProject value, $Res Function(MemoProject) _then) = _$MemoProjectCopyWithImpl;
 @useResult
 $Res call({
- int id, String name, String? clientName
+ String id, String name, String? clientName
 });
 
 
@@ -68,7 +68,7 @@ class _$MemoProjectCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? clientName = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,clientName: freezed == clientName ? _self.clientName : clientName // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -155,7 +155,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  String? clientName)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String? clientName)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MemoProject() when $default != null:
 return $default(_that.id,_that.name,_that.clientName);case _:
@@ -176,7 +176,7 @@ return $default(_that.id,_that.name,_that.clientName);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  String? clientName)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String? clientName)  $default,) {final _that = this;
 switch (_that) {
 case _MemoProject():
 return $default(_that.id,_that.name,_that.clientName);case _:
@@ -196,7 +196,7 @@ return $default(_that.id,_that.name,_that.clientName);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  String? clientName)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String? clientName)?  $default,) {final _that = this;
 switch (_that) {
 case _MemoProject() when $default != null:
 return $default(_that.id,_that.name,_that.clientName);case _:
@@ -214,7 +214,7 @@ class _MemoProject implements MemoProject {
   const _MemoProject({required this.id, required this.name, this.clientName});
   factory _MemoProject.fromJson(Map<String, dynamic> json) => _$MemoProjectFromJson(json);
 
-@override final  int id;
+@override final  String id;
 @override final  String name;
 @override final  String? clientName;
 
@@ -251,7 +251,7 @@ abstract mixin class _$MemoProjectCopyWith<$Res> implements $MemoProjectCopyWith
   factory _$MemoProjectCopyWith(_MemoProject value, $Res Function(_MemoProject) _then) = __$MemoProjectCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name, String? clientName
+ String id, String name, String? clientName
 });
 
 
@@ -271,7 +271,7 @@ class __$MemoProjectCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? clientName = freezed,}) {
   return _then(_MemoProject(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,clientName: freezed == clientName ? _self.clientName : clientName // ignore: cast_nullable_to_non_nullable
 as String?,
   ));

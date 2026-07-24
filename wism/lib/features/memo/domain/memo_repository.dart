@@ -21,25 +21,25 @@ abstract class MemoRepository {
     MemoSort sort = MemoSort.latest,
   });
 
-  Future<Memo> detail(int id);
+  Future<Memo> detail(String id);
   Future<Memo> create(MemoDraft draft);
-  Future<Memo> update(int id, MemoDraft draft);
-  Future<void> delete(int id);
-  Future<Memo> setBookmark(int id, {required bool bookmarked});
-  Future<Memo> markRead(int id);
-  Future<Comment> addComment(int memoId, String content);
-  Future<void> updateComment(int memoId, int commentId, String content);
-  Future<void> deleteComment(int memoId, int commentId);
+  Future<Memo> update(String id, MemoDraft draft);
+  Future<void> delete(String id);
+  Future<Memo> setBookmark(String id, {required bool bookmarked});
+  Future<Memo> markRead(String id);
+  Future<Comment> addComment(String memoId, String content);
+  Future<void> updateComment(String memoId, String commentId, String content);
+  Future<void> deleteComment(String memoId, String commentId);
 
   /// 첨부 업로드 (멀티파트). 성공 시 생성된 첨부.
   Future<Attachment> uploadAttachment(
-      int memoId, String filePath, String fileName);
+      String memoId, String filePath, String fileName);
 
   /// 첨부 삭제 (메모 작성자만).
-  Future<void> deleteAttachment(int attachmentId);
+  Future<void> deleteAttachment(String attachmentId);
 
   /// 첨부 다운로드 → 바이트.
-  Future<List<int>> downloadAttachment(int attachmentId);
+  Future<List<int>> downloadAttachment(String attachmentId);
 
   /// 확인자 태그 자동완성.
   Future<List<UserRef>> searchUsers(String query);

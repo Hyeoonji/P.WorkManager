@@ -6,7 +6,7 @@ import 'package:wism/features/memo/domain/memo_repository.dart';
 
 void main() {
   const tester =
-      AppUser(id: 100, employeeNo: '99999', name: '테스터', dept: 'QA', position: '팀장');
+      AppUser(id: '100', employeeNo: '99999', name: '테스터', dept: 'QA', position: '팀장');
   late MockMemoRepository repo;
 
   setUp(() => repo = MockMemoRepository(tester));
@@ -40,33 +40,33 @@ void main() {
   });
 
   test('읽음 확인 시 readBy 증가 + isRead', () async {
-    final before = await repo.detail(4);
-    final after = await repo.markRead(4);
+    final before = await repo.detail('4');
+    final after = await repo.markRead('4');
     expect(after.readBy, before.readBy + 1);
     expect(after.isRead, isTrue);
   });
 
   test('댓글 추가 시 commentCount 증가', () async {
-    final before = await repo.detail(2);
-    await repo.addComment(2, '확인했습니다');
-    final after = await repo.detail(2);
+    final before = await repo.detail('2');
+    await repo.addComment('2', '확인했습니다');
+    final after = await repo.detail('2');
     expect(after.commentCount, before.commentCount + 1);
   });
 
   test('북마크 설정', () async {
-    final m = await repo.setBookmark(5, bookmarked: true);
+    final m = await repo.setBookmark('5', bookmarked: true);
     expect(m.bookmarked, isTrue);
   });
 
   test('댓글 수정/삭제', () async {
-    final c = await repo.addComment(3, '임시 댓글');
-    await repo.updateComment(3, c.id, '수정된 댓글');
-    var m = await repo.detail(3);
+    final c = await repo.addComment('3', '임시 댓글');
+    await repo.updateComment('3', c.id, '수정된 댓글');
+    var m = await repo.detail('3');
     expect(m.comments.firstWhere((x) => x.id == c.id).content, '수정된 댓글');
 
     final before = m.commentCount;
-    await repo.deleteComment(3, c.id);
-    m = await repo.detail(3);
+    await repo.deleteComment('3', c.id);
+    m = await repo.detail('3');
     expect(m.comments.any((x) => x.id == c.id), isFalse);
     expect(m.commentCount, before - 1);
   });

@@ -54,15 +54,5 @@ void main() {
     await repo.logout();
     expect(await repo.currentUser(), isNull);
   });
-
-  test('프로필 수정 반영', () async {
-    await repo.login('00009', '0000');
-    final updated = await repo.updateProfile(
-      name: '최정민',
-      position: '실장',
-      email: 'choi@wintek.com',
-    );
-    expect(updated.position, '실장');
-    expect(updated.email, 'choi@wintek.com');
-  });
+  // 프로필 수정 테스트 제거 — 프로필은 회사 인사시스템 소유(읽기전용)
 }

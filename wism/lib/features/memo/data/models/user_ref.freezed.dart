@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserRef {
 
- int get id; String get name; String? get dept; String? get position; String? get photoUrl;
+ String get id; String get name; String? get dept; String? get position; String? get photoUrl;
 /// Create a copy of UserRef
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $UserRefCopyWith<$Res>  {
   factory $UserRefCopyWith(UserRef value, $Res Function(UserRef) _then) = _$UserRefCopyWithImpl;
 @useResult
 $Res call({
- int id, String name, String? dept, String? position, String? photoUrl
+ String id, String name, String? dept, String? position, String? photoUrl
 });
 
 
@@ -68,7 +68,7 @@ class _$UserRefCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? dept = freezed,Object? position = freezed,Object? photoUrl = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,dept: freezed == dept ? _self.dept : dept // ignore: cast_nullable_to_non_nullable
 as String?,position: freezed == position ? _self.position : position // ignore: cast_nullable_to_non_nullable
 as String?,photoUrl: freezed == photoUrl ? _self.photoUrl : photoUrl // ignore: cast_nullable_to_non_nullable
@@ -157,7 +157,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  String? dept,  String? position,  String? photoUrl)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String? dept,  String? position,  String? photoUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserRef() when $default != null:
 return $default(_that.id,_that.name,_that.dept,_that.position,_that.photoUrl);case _:
@@ -178,7 +178,7 @@ return $default(_that.id,_that.name,_that.dept,_that.position,_that.photoUrl);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  String? dept,  String? position,  String? photoUrl)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String? dept,  String? position,  String? photoUrl)  $default,) {final _that = this;
 switch (_that) {
 case _UserRef():
 return $default(_that.id,_that.name,_that.dept,_that.position,_that.photoUrl);case _:
@@ -198,7 +198,7 @@ return $default(_that.id,_that.name,_that.dept,_that.position,_that.photoUrl);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  String? dept,  String? position,  String? photoUrl)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String? dept,  String? position,  String? photoUrl)?  $default,) {final _that = this;
 switch (_that) {
 case _UserRef() when $default != null:
 return $default(_that.id,_that.name,_that.dept,_that.position,_that.photoUrl);case _:
@@ -216,7 +216,7 @@ class _UserRef implements UserRef {
   const _UserRef({required this.id, required this.name, this.dept, this.position, this.photoUrl});
   factory _UserRef.fromJson(Map<String, dynamic> json) => _$UserRefFromJson(json);
 
-@override final  int id;
+@override final  String id;
 @override final  String name;
 @override final  String? dept;
 @override final  String? position;
@@ -255,7 +255,7 @@ abstract mixin class _$UserRefCopyWith<$Res> implements $UserRefCopyWith<$Res> {
   factory _$UserRefCopyWith(_UserRef value, $Res Function(_UserRef) _then) = __$UserRefCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name, String? dept, String? position, String? photoUrl
+ String id, String name, String? dept, String? position, String? photoUrl
 });
 
 
@@ -275,7 +275,7 @@ class __$UserRefCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? dept = freezed,Object? position = freezed,Object? photoUrl = freezed,}) {
   return _then(_UserRef(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,dept: freezed == dept ? _self.dept : dept // ignore: cast_nullable_to_non_nullable
 as String?,position: freezed == position ? _self.position : position // ignore: cast_nullable_to_non_nullable
 as String?,photoUrl: freezed == photoUrl ? _self.photoUrl : photoUrl // ignore: cast_nullable_to_non_nullable
