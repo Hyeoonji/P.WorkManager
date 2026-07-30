@@ -6,6 +6,12 @@ import '../data/models/memo_project.dart';
 import '../data/models/user_ref.dart';
 import 'memo_draft.dart';
 
+/// 메모가 이미 삭제되었거나 존재하지 않을 때(서버 404). 상세 화면이 "삭제된
+/// 메모입니다" 안내 후 홈으로 복귀하는 데 쓴다.
+class MemoNotFoundException implements Exception {
+  const MemoNotFoundException();
+}
+
 /// 메모 목록 조회 범위.
 enum MemoScope { all, my, bookmarks }
 

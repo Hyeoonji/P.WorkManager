@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:media_store_plus/media_store_plus.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -12,6 +14,7 @@ import '../../../shared/widgets/app_dialog.dart';
 import '../../../shared/widgets/memo_badges.dart';
 import '../../auth/application/auth_controller.dart';
 import '../application/memo_providers.dart';
+import '../domain/memo_repository.dart';
 import '../data/models/attachment.dart';
 import '../data/models/comment.dart';
 import '../data/models/memo.dart';
@@ -29,6 +32,7 @@ class MemoDetailPage extends ConsumerStatefulWidget {
 class _MemoDetailPageState extends ConsumerState<MemoDetailPage> {
   final _commentController = TextEditingController();
   bool _sending = false;
+  bool _gone = false; // 삭제된 메모 안내·홈복귀를 한 번만 실행하기 위한 가드
 
   @override
   void dispose() {
@@ -155,13 +159,60 @@ class _MemoDetailPageState extends ConsumerState<MemoDetailPage> {
       ),
       body: async.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, _) => const Center(child: Text('메모를 불러오지 못했습니다.')),
+        error: (e, _) => _errorView(e),
         data: (memo) => Column(
           children: [
             Expanded(child: _body(memo)),
             _commentInput(),
           ],
         ),
+      ),
+    );
+  }
+
+  /// 상세 로드 실패 화면. 삭제된 메모(404)면 안내 후 홈으로 자동 복귀하고
+  /// 목록을 갱신해 무한 재조회를 끊는다. 그 외 오류는 재시도 버튼을 준다.
+  Widget _errorView(Object error) {
+    final gone = error is MemoNotFoundException;
+    if (gone && !_gone) {
+      _gone = true;
+      // build 중 네비게이션 금지 → 프레임 종료 후 실행.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        ref.invalidate(memoListProvider);
+        ref.invalidate(allMemosProvider);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('삭제된 메모입니다.')),
+        );
+        if (context.canPop()) {
+          context.pop();
+        } else {
+          context.go('/home');
+        }
+      });
+    }
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            gone ? LucideIcons.trash2 : LucideIcons.wifiOff,
+            size: 40,
+            color: AppColors.textMuted,
+          ),
+          const SizedBox(height: 12),
+          Text(
+            gone ? '삭제된 메모입니다.' : '메모를 불러오지 못했습니다.',
+            style: const TextStyle(color: AppColors.textMuted),
+          ),
+          if (!gone) ...[
+            const SizedBox(height: 12),
+            TextButton(
+              onPressed: () => ref.invalidate(memoDetailProvider(widget.memoId)),
+              child: const Text('다시 시도'),
+            ),
+          ],
+        ],
       ),
     );
   }
@@ -340,14 +391,38 @@ class _MemoDetailPageState extends ConsumerState<MemoDetailPage> {
       final bytes = await ref
           .read(memoRepositoryProvider)
           .downloadAttachment(a.id);
+      // 1) 임시 파일로 저장(열기용)
       final dir = await getTemporaryDirectory();
       final file = File('${dir.path}/${a.fileName}');
       await file.writeAsBytes(bytes);
+
+      // 2) 공용 저장소(Download/WISM)에 저장 — '내 파일'에서 보이게
+      String? savedMsg;
+      try {
+        final saveInfo = await MediaStore().saveFile(
+          tempFilePath: file.path,
+          dirType: DirType.download,
+          dirName: DirName.download,
+        );
+        if (saveInfo != null) {
+          savedMsg = saveInfo.isDuplicated
+              ? '이미 다운로드 폴더에 있습니다'
+              : '다운로드 폴더(WISM)에 저장됨';
+        }
+      } catch (e) {
+        savedMsg = '저장 실패(열기는 시도)';
+        debugPrint('[attach] MediaStore 저장 실패: $e');
+      }
+
+      // 3) 뷰어로 열기
       final result = await OpenFilex.open(file.path);
-      if (result.type != ResultType.done && mounted) {
+      if (!mounted) return;
+      if (result.type != ResultType.done) {
         messenger.showSnackBar(
           SnackBar(content: Text('파일을 열 수 없습니다: ${result.message}')),
         );
+      } else if (savedMsg != null) {
+        messenger.showSnackBar(SnackBar(content: Text(savedMsg)));
       }
     } catch (_) {
       if (mounted) {

@@ -3,10 +3,15 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- FCM 푸시 알림 (Android 13+ 런타임 요청 필요) -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <!-- 첨부 다운로드 저장: API 29 이하만 필요(30+는 MediaStore로 권한 불요) -->
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
     <application
         android:label="WISM"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
+        android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true">
         <!-- 개발용 HTTP(평문) 허용. 운영(HTTPS) 전환 시 제거. -->
 

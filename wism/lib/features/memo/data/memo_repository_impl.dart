@@ -37,8 +37,16 @@ class MemoRepositoryImpl implements MemoRepository {
 
   @override
   Future<Memo> detail(String id) async {
-    final res = await _dio.get<Map<String, dynamic>>('/memos/$id');
-    return Memo.fromJson(res.data!);
+    try {
+      final res = await _dio.get<Map<String, dynamic>>('/memos/$id');
+      return Memo.fromJson(res.data!);
+    } on DioException catch (e) {
+      // 삭제됐거나 없는 메모 → 상세 화면이 '삭제됨'으로 처리하도록 구분된 예외로.
+      if (e.response?.statusCode == 404) {
+        throw const MemoNotFoundException();
+      }
+      rethrow;
+    }
   }
 
   @override
