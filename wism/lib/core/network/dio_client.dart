@@ -20,5 +20,9 @@ final dioProvider = Provider<Dio>((ref) {
   dio.interceptors.add(
     AuthInterceptor(ref.read(tokenStorageProvider), Env.apiBaseUrl),
   );
+  // 서버 연결 진단이 필요하면 wism_log_interceptor.dart 를 import 하고
+  // 아래 한 줄의 주석을 풀어 재빌드한다.
+  // ⚠️ 요청·응답 본문(메모 내용·개인정보·FCM 토큰)이 logcat에 남으므로 배포본에는 넣지 않는다.
+  // dio.interceptors.add(const WismLogInterceptor());
   return dio;
 });

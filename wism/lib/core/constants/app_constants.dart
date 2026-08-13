@@ -1,3 +1,10 @@
+/// 앱 버전 표시 — 화면에 보여줄 때는 항상 이 값을 쓴다.
+/// ⚠️ pubspec.yaml 의 `version:` 과 반드시 같이 올릴 것.
+abstract class AppInfo {
+  static const version = '1.4.0';
+  static const versionLabel = 'v$version';
+}
+
 /// 메모 카테고리 (계획서 1.3 / DB ENUM)
 abstract class MemoCategory {
   static const schedule = '일정';

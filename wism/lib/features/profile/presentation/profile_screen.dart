@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+import '../../../core/constants/app_constants.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../auth/application/auth_controller.dart';
 import '../../help/presentation/help_screen.dart';
@@ -133,7 +134,7 @@ class ProfileScreen extends ConsumerWidget {
                   iconColor: AppColors.textSub,
                   icon: LucideIcons.info,
                   label: '버전 정보',
-                  trailing: const Text('v1.0.0',
+                  trailing: const Text(AppInfo.versionLabel,
                       style: TextStyle(fontSize: 13, color: AppColors.textMuted)),
                 ),
                 _indentDivider(),

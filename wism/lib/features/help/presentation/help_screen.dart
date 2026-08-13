@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+import '../../../core/constants/app_constants.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../onboarding/presentation/onboarding_screen.dart';
 
@@ -80,7 +81,7 @@ class HelpScreen extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           const Center(
-            child: Text('WISM v1.0.0 · Wintek Corp.',
+            child: Text('WISM ${AppInfo.versionLabel} · Wintek Corp.',
                 style: TextStyle(fontSize: 12, color: AppColors.textMuted)),
           ),
         ],

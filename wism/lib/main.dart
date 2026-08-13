@@ -8,12 +8,16 @@ import 'package:media_store_plus/media_store_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/app.dart';
+import 'core/constants/app_constants.dart';
+import 'core/network/wism_log_interceptor.dart';
 import 'core/push/push_service.dart';
 import 'features/onboarding/application/onboarding_providers.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
+  // 설치된 빌드를 확인하기 위한 최소 로그(개인정보 없음).
+  WismLogInterceptor.log('앱 시작 v${AppInfo.version}');
 
   // 첨부 다운로드를 공용 저장소(Download/WISM)에 저장하기 위한 MediaStore 초기화.
   MediaStore.appFolder = 'WISM';
