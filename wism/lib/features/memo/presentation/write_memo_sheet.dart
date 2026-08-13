@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
@@ -8,7 +11,6 @@ import '../../../core/theme/app_colors.dart';
 import '../application/memo_providers.dart';
 import '../data/models/attachment.dart';
 import '../data/models/memo.dart';
-import '../data/models/memo_project.dart';
 import '../data/models/user_ref.dart';
 import '../domain/memo_draft.dart';
 import 'widgets/attachment_widgets.dart';
@@ -48,7 +50,6 @@ class _WriteMemoDialogState extends ConsumerState<_WriteMemoDialog> {
   late final TextEditingController _content;
   late String _priority;
   late String _category;
-  MemoProject? _project;
   DateTime? _scheduledDate;
   late List<UserRef> _assignees;
   late List<Attachment> _existingAttachments; // 수정 모드: 서버에 있는 첨부
@@ -76,14 +77,13 @@ class _WriteMemoDialogState extends ConsumerState<_WriteMemoDialog> {
     _content = TextEditingController(text: e?.content ?? '');
     _priority = e?.priority ?? MemoPriority.normal;
     _category = e?.category ?? MemoCategory.schedule;
-    _project = e?.project;
     _scheduledDate = e?.scheduledDate;
     _assignees = e?.assignees
             .map((a) => UserRef(id: a.userId, name: a.name))
             .toList() ??
         [];
     _existingAttachments = e?.attachments.toList() ?? [];
-    _projectQuery.text = _project?.name ?? '';
+    _projectQuery.text = e?.project?.name ?? '';
     _assigneeFocus.addListener(() => setState(() {}));
     _projectFocus.addListener(() => setState(() {}));
   }
@@ -109,7 +109,7 @@ class _WriteMemoDialogState extends ConsumerState<_WriteMemoDialog> {
       content: _content.text.trim(),
       priority: _priority,
       category: _category,
-      projectId: _project?.id,
+      projectId: _projectTag(),
       scheduledDate:
           _category == MemoCategory.schedule ? _scheduledDate : null,
       assigneeIds: _assignees.map((u) => u.id).toList(),
@@ -354,55 +354,78 @@ class _WriteMemoDialogState extends ConsumerState<_WriteMemoDialog> {
     );
   }
 
-  // ── 사업(프로젝트): 인라인 검색 드롭다운 ──
+  /// 저장할 사업 태그. 자유 입력이라 적은 글자가 곧 값이다(선택 강제 없음).
+  String? _projectTag() {
+    final t = _projectQuery.text.trim();
+    return t.isEmpty ? null : t;
+  }
+
+  // ── 사업(프로젝트): 자유 입력 태그 + 이미 쓰인 태그 추천 ──
+  //
+  // 회사 공식 사업명을 아직 받을 수 없어 사용자가 직접 적는다. 다만 같은 사업을
+  // 사람마다 다르게 적으면 나중에 사업별로 묶어 볼 수 없으므로, 이미 쓰인 태그를
+  // 같이 띄워 눌러 쓰게 한다(메모 목록에 들어있는 값이라 서버 호출 없음).
   Widget _projectField() {
     final q = _projectQuery.text.trim();
-    // 포커스되면 입력 전에도 전체 목록을 미리보기로 보여준다.
     final showPanel = _projectFocus.hasFocus;
+    final remain = ProjectTag.maxChars - _projectQuery.text.runes.length;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _searchInput(
           controller: _projectQuery,
           focus: _projectFocus,
-          hint: '사업명을 검색하세요',
-          onChanged: () {
-            if (_project != null && _projectQuery.text != _project!.name) {
-              _project = null;
-            }
-          },
-          onClear: (_project == null && q.isEmpty)
-              ? null
-              : () => setState(() {
-                    _project = null;
-                    _projectQuery.clear();
-                  }),
+          hint: '사업명을 입력하세요',
+          inputFormatters: const [_ProjectTagFormatter()],
+          onChanged: () {},
+          onClear: q.isEmpty ? null : () => setState(_projectQuery.clear),
         ),
-        if (showPanel)
+        if (showPanel) ...[
+          Padding(
+            padding: const EdgeInsets.only(top: 4, left: 4),
+            child: Text(
+              '최대 ${ProjectTag.maxChars}자 · $remain자 남음',
+              style: const TextStyle(fontSize: 11, color: AppColors.textMuted),
+            ),
+          ),
           _panelBox(
-            child: ref.watch(projectSearchProvider(q)).maybeWhen(
-                  data: (list) => list.isEmpty
-                      ? _panelEmpty('검색 결과가 없습니다')
-                      : ListView(
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          children: list
-                              .map((p) => _panelTile(
-                                    leading:
-                                        _miniIcon(LucideIcons.briefcase),
-                                    title: p.name,
-                                    subtitle: p.clientName,
-                                    onTap: () => setState(() {
-                                      _project = p;
-                                      _projectQuery.text = p.name;
-                                      _projectFocus.unfocus();
-                                    }),
-                                  ))
-                              .toList(),
-                        ),
+            child: ref.watch(usedProjectTagsProvider).maybeWhen(
+                  data: (tags) => _projectSuggestions(tags, q),
                   orElse: _panelLoading,
                 ),
           ),
+        ],
+      ],
+    );
+  }
+
+  /// 추천 목록 = (이미 쓰인 태그 중 입력어와 겹치는 것) + (신규 태그로 쓰기).
+  Widget _projectSuggestions(List<String> tags, String q) {
+    final matched = tags
+        .where((t) => q.isEmpty || t.toLowerCase().contains(q.toLowerCase()))
+        .toList();
+    final isNew = q.isNotEmpty && !tags.any((t) => t == q);
+    if (matched.isEmpty && !isNew) {
+      return _panelEmpty('아직 쓰인 사업이 없습니다. 직접 입력하세요');
+    }
+    return ListView(
+      shrinkWrap: true,
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      children: [
+        if (isNew)
+          _panelTile(
+            leading: _miniIcon(LucideIcons.plus),
+            title: '\'$q\' 새 사업으로 쓰기',
+            onTap: () => setState(_projectFocus.unfocus),
+          ),
+        ...matched.map((t) => _panelTile(
+              leading: _miniIcon(LucideIcons.briefcase),
+              title: t,
+              onTap: () => setState(() {
+                _projectQuery.text = t;
+                _projectFocus.unfocus();
+              }),
+            )),
       ],
     );
   }
@@ -523,10 +546,12 @@ class _WriteMemoDialogState extends ConsumerState<_WriteMemoDialog> {
     required String hint,
     VoidCallback? onChanged,
     VoidCallback? onClear,
+    List<TextInputFormatter>? inputFormatters,
   }) {
     return TextField(
       controller: controller,
       focusNode: focus,
+      inputFormatters: inputFormatters,
       style: _inputTextStyle,
       onChanged: (_) => setState(() => onChanged?.call()),
       decoration: _dec(hint).copyWith(
@@ -855,4 +880,26 @@ class _DashedRRectPainter extends CustomPainter {
   @override
   bool shouldRepaint(_DashedRRectPainter old) =>
       old.color != color || old.radius != radius;
+}
+
+/// 사업 태그 입력 제한.
+///
+/// 사용자에게는 "10자"로만 안내하지만, 저장처인 오라클 `PJTCODE` 는 30 **바이트**
+/// 제한이라 이모지처럼 무거운 문자가 섞이면 10자여도 넘칠 수 있다. 넘치면 오라클이
+/// ORA-12899 로 거부해 저장 자체가 실패하므로, 글자 수와 바이트 수를 함께 막는다.
+class _ProjectTagFormatter extends TextInputFormatter {
+  const _ProjectTagFormatter();
+
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    final text = newValue.text;
+    if (text.runes.length <= ProjectTag.maxChars &&
+        utf8.encode(text).length <= ProjectTag.maxBytes) {
+      return newValue;
+    }
+    return oldValue; // 한도를 넘는 입력은 그냥 무시한다.
+  }
 }

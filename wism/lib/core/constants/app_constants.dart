@@ -24,6 +24,18 @@ abstract class MemoPriority {
   static const all = [normal, urgent];
 }
 
+/// 사업(프로젝트) 태그 제약.
+///
+/// 회사 공식 사업명을 아직 받을 수 없어, 사용자가 직접 적는 자유 태그로 운영한다.
+/// 저장 위치는 오라클 `WEP_WISM_MEMO.PJTCODE VARCHAR2(30 BYTE)` 이고
+/// 캐릭터셋이 AL32UTF8(한글 1자 = 3바이트)이라 **한글 10자가 정확히 30바이트**다.
+/// 그래서 화면에는 "10자"로만 안내하고, 이모지처럼 3바이트를 넘는 문자가 섞여도
+/// 넘치지 않도록 [maxBytes] 로 한 번 더 막는다.
+abstract class ProjectTag {
+  static const maxChars = 10;
+  static const maxBytes = 30;
+}
+
 /// 첨부 제약 (9-5 확정)
 abstract class AttachmentLimit {
   static const maxBytes = 10 * 1024 * 1024; // 10MB

@@ -70,3 +70,22 @@ final projectSearchProvider =
     FutureProvider.autoDispose.family<List<MemoProject>, String>((ref, q) async {
   return ref.watch(memoRepositoryProvider).searchProjects(q);
 });
+
+/// 이미 쓰인 사업 태그 (최근 사용 순).
+///
+/// 회사 사업 마스터가 비어 있어 [projectSearchProvider] 로는 아무것도 안 뜬다.
+/// 대신 메모에 실제로 적힌 태그를 모아 보여줘서, 같은 사업을 사람마다
+/// 다르게 적는 걸(천궁2차 / 천궁 2차 / 천궁-2차) 막는다.
+/// 메모 목록에 이미 들어있는 값이라 서버를 따로 호출하지 않는다.
+final usedProjectTagsProvider =
+    FutureProvider.autoDispose<List<String>>((ref) async {
+  final memos = await ref.watch(allMemosProvider.future);
+  final seen = <String>{};
+  final tags = <String>[];
+  for (final m in memos) {
+    final name = m.project?.name.trim();
+    if (name == null || name.isEmpty) continue;
+    if (seen.add(name)) tags.add(name);
+  }
+  return tags;
+});
